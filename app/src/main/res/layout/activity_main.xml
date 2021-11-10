@@ -34,10 +34,10 @@
         android:layout_marginBottom="24dp"
         android:text="Add Todo"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/deleteDoneTodo" />
+        app:layout_constraintEnd_toStartOf="@+id/deleteDoneTodos" />
 
     <Button
-        android:id="@+id/deleteDoneTodo"
+        android:id="@+id/deleteDoneTodos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
