@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/TodoListKotlinApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Android/TodoListKotlinApp/app/src/main/res/layout/addtodo.xml" value="0.184375" />
+        <entry key="..\:/Android/TodoListKotlinApp/app/src/main/res/layout/list_item.xml" value="0.184375" />
         <entry key="..\:/TodoListKotlinApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/TodoListKotlinApp/app/src/main/res/layout/addtodo.xml" value="0.1734375" />
       </map>
