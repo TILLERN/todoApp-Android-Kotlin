@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TodoListKotlinApp">
         <activity
+            android:name=".add_todo"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

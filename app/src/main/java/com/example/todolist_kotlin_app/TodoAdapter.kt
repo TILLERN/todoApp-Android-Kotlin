@@ -10,28 +10,31 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
+import org.w3c.dom.Text
 import kotlin.coroutines.coroutineContext
 
-class TodoAdapter(private val context: Context): RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
-    private val layoutInflater = LayoutInflater.from(context)
-
-    class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
-        val myHeading = itemView?.findViewById<TextView?>(R.id.tvHeader)
-        val myDescription = itemView?.findViewById<TextView?>(R.id.tvDescription)
+class TodoAdapter( val todo:List<Todo>): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>(){
+    inner class TodoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        var title = itemView.findViewById<TextView>(R.id.tvHeader)
+        var body = itemView.findViewById<TextView>(R.id.tvDescription)
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = layoutInflater.inflate(R.layout.list_item, parent, false)
-        return ViewHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
+        val inflate = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+        return TodoViewHolder(inflate)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
+        val currentItem = todo[position]
+        holder.title.text = currentItem.title
+        holder.body.text = currentItem.description
+
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return todo.size
     }
 
 }
+
