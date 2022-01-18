@@ -13,11 +13,30 @@ import androidx.recyclerview.widget.RecyclerView
 import org.w3c.dom.Text
 import kotlin.coroutines.coroutineContext
 
-class TodoAdapter( val todo:List<Todo>): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>(){
+class TodoAdapter( val todos:MutableList<Todo>): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>(){
     inner class TodoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        var title = itemView.findViewById<TextView>(R.id.tvHeader)
-        var body = itemView.findViewById<TextView>(R.id.tvDescription)
 
+
+    }
+
+    fun addTodo(todo: Todo) {
+        todos.add(todo)
+        notifyItemInserted(todos.size - 1)
+    }
+
+    fun deleteDoneTodos() {
+        todos.removeAll { todo ->
+            todo.isChecked
+        }
+        notifyDataSetChanged()
+    }
+
+    private fun toggleStrikeThrough(tvTodoTitle: TextView, isChecked: Boolean) {
+        if(isChecked) {
+            tvTodoTitle.paintFlags = tvTodoTitle.paintFlags or STRIKE_THRU_TEXT_FLAG
+        } else {
+            tvTodoTitle.paintFlags = tvTodoTitle.paintFlags and STRIKE_THRU_TEXT_FLAG.inv()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
@@ -26,14 +45,21 @@ class TodoAdapter( val todo:List<Todo>): RecyclerView.Adapter<TodoAdapter.TodoVi
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        val currentItem = todo[position]
-        holder.title.text = currentItem.title
-        holder.body.text = currentItem.description
+        val curTodo = todos[position]
+        holder.itemView.apply {
+            tvTodoTitle.text = curTodo.title
+            cbDone.isChecked = curTodo.isChecked
+            toggleStrikeThrough(tvTodoTitle, curTodo.isChecked)
+            cbDone.setOnCheckedChangeListener { _, isChecked ->
+                toggleStrikeThrough(tvTodoTitle, isChecked)
+                curTodo.isChecked = !curTodo.isChecked
+            }
+        }
 
     }
 
     override fun getItemCount(): Int {
-        return todo.size
+        return todos.size
     }
 
 }
